@@ -1,0 +1,119 @@
+<!-- admin/dashboard.html -->
+
+<div th:fragment="content">
+    <div class="container-fluid">
+        <!-- Tiêu đề trang -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="text-danger font-weight-bold">
+                    <i class="fas fa-tachometer-alt mr-2"></i>
+                    Tổng Quan Phòng Khám
+                </h2>
+                <small class="text-muted">
+                    Cập nhật lúc:
+                    <span>29/01/2026</span>
+                </small>
+            </div>
+        </div>
+
+        <!-- Row các Small Box thống kê -->
+        <div class="row">
+            <!-- Tổng lịch hẹn -->
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-primary">
+                    <div class="inner">
+                        <h3 th:text="${totalAppointments} ?: '6'">6</h3>
+                        <p>Tổng Lịch Hẹn</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                        Chi tiết <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Bác sĩ đang làm việc -->
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3 th:text="${activeDoctors} ?: '4'">4</h3>
+                        <p>Bác Sĩ Đang Làm Việc</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                        Chi tiết <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tổng bệnh nhân -->
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3 th:text="${totalPatients} ?: '450'">450</h3>
+                        <p>Tổng Bệnh Nhân</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                        Chi tiết <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Lịch hẹn đang chờ -->
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h3 th:text="${pendingAppointments} ?: '4'">4</h3>
+                        <p>Lịch Hẹn Đang Chờ</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                        Chi tiết <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row các biểu đồ -->
+        <div class="row">
+            <!-- Pie Chart: Phân bổ trạng thái lịch hẹn -->
+            <div class="col-lg-6">
+                <div class="card card-danger card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">Phân Bổ Trạng Thái Lịch Hẹn</h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="statusChart" style="min-height: 300px;"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Doughnut Chart: Phân bổ giới tính bệnh nhân -->
+            <div class="col-lg-6">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">Phân Bổ Giới Tính Bệnh Nhân</h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="genderChart" style="min-height: 300px;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts riêng cho trang này (Chart.js + logic) -->
+<th:block th:fragment="extraScripts">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="/ClinicManagement/frontend/resources/static/js/admin/Dashboard"></script>
+</th:block>

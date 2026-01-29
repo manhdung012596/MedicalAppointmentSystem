@@ -1,0 +1,84 @@
+<!-- 16. doctor-prescriptions.html -->
+{% extends "doctor-layout.html" %}
+{% block title %}Kê đơn thuốc - Bác sĩ{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Kê đơn thuốc cho bệnh nhân Trần Thị B</h3>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Tên thuốc</label>
+                  <select class="form-control">
+                    <option>Paracetamol 500mg</option>
+                    <option>Ibuprofen 200mg</option>
+                    <option>Amoxicillin 500mg</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Số lượng</label>
+                  <input type="number" class="form-control" value="10">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Liều dùng</label>
+                  <input type="text" class="form-control" placeholder="2 viên/lần, 3 lần/ngày">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Lời dặn</label>
+              <textarea class="form-control" rows="3" placeholder="Uống sau ăn, nghỉ ngơi đầy đủ..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Lưu đơn thuốc</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Lịch sử kê đơn</h3>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Ngày</th>
+                <th>Bệnh nhân</th>
+                <th>Thuốc kê</th>
+                <th>Liều dùng</th>
+                <th>Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>20/12/2025</td>
+                <td>Trần Thị B</td>
+                <td>Paracetamol 500mg</td>
+                <td>2 viên/lần, 3 lần/ngày</td>
+                <td>
+                  <button class="btn btn-sm btn-info">Xem</button>
+                  <button class="btn btn-sm btn-warning">Sửa</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

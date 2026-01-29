@@ -1,0 +1,210 @@
+/* layout.css - CSS chung cho tất cả giao diện (Admin, Bác sĩ, Bệnh nhân) */
+/* Sử dụng CSS Variables để dễ thay đổi theme theo role */
+
+/* Theme Variables - Chỉnh ở đây để thay đổi toàn bộ giao diện */
+:root {
+    --sidebar-width-full: 240px;
+    --sidebar-width-collapsed: 70px;
+    --sidebar-bg: #212b36;          /* Nền sidebar tối */
+    --sidebar-text: #c2c7d0;        /* Chữ/icon nhạt */
+    --sidebar-hover-bg: rgba(255, 255, 255, 0.08);
+    --sidebar-active-bg: rgba(255, 255, 255, 0.15);
+    --sidebar-header-bg: #1a222b;
+    --content-bg: #f4f6f8;
+    --footer-bg: #f8f9fa;
+    --footer-text: #6c757d;
+    --footer-border: #dee2e6;
+    --transition: all 0.3s ease;
+}
+
+/* Theme cho Admin (màu đỏ) - override variables nếu cần */
+body.accent-danger {
+    --sidebar-bg: #343a40;
+    --sidebar-header-bg: #2c3137;
+}
+
+/* Theme cho Bác sĩ (màu xanh) - ví dụ override */
+body.sidebar-dark-primary {
+    --sidebar-bg: #0d6efd; /* Xanh primary */
+    --sidebar-text: #ffffff;
+    --sidebar-hover-bg: rgba(0, 0, 0, 0.15);
+}
+
+/* Body chung */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--content-bg);
+    transition: var(--transition);
+}
+
+/* Sidebar chung */
+.main-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: var(--sidebar-width-full);
+    background: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    transition: var(--transition);
+    overflow-x: hidden;
+    z-index: 1000;
+}
+
+/* Sidebar thu gọn (chỉ icon) */
+body.sidebar-mini .main-sidebar {
+    width: var(--sidebar-width-collapsed) !important;
+}
+
+/* Sidebar header (logo/brand) */
+.main-sidebar .brand-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    padding: 0 15px;
+    background: var(--sidebar-header-bg);
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #fff;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+/* Menu list chung */
+.main-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Menu item (li) chung - đẹp, hiện đại */
+.main-sidebar ul li {
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: var(--transition);
+    border-radius: 6px;
+    margin: 4px 8px;
+    font-size: 0.95rem;
+    letter-spacing: 0.4px;
+    display: flex;
+    align-items: center;
+}
+
+/* Icon & Text */
+.main-sidebar ul li i,
+.main-sidebar ul li span {
+    color: #ffffff;
+    transition: color 0.25s ease;
+}
+
+.main-sidebar ul li i {
+    margin-right: 14px;
+    font-size: 1.25rem;
+    width: 24px;
+    text-align: center;
+}
+
+/* Hover effect - tinh tế */
+.main-sidebar ul li:hover {
+    background: var(--sidebar-hover-bg);
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.main-sidebar ul li:hover i,
+.main-sidebar ul li:hover span {
+    color: #b24646;
+}
+
+/* Active state */
+.main-sidebar ul li.active {
+    background: var(--sidebar-active-bg);
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.main-sidebar ul li.active i,
+.main-sidebar ul li.active span {
+    color: #c15959;
+}
+
+/* Last item */
+.main-sidebar ul li:last-child {
+    margin-bottom: 0;
+}
+
+/* Nội dung chính (content-wrapper) */
+.content-wrapper,
+.main-footer {
+    margin-left: var(--sidebar-width-full);
+    transition: margin-left var(--transition);
+}
+
+body.sidebar-mini .content-wrapper,
+body.sidebar-mini .main-footer {
+    margin-left: var(--sidebar-width-collapsed);
+}
+
+/* Footer chung - đẹp, responsive */
+.main-footer {
+    background: var(--footer-bg);
+    padding: 1rem 2rem;
+    border-top: 1px solid var(--footer-border);
+    color: var(--footer-text);
+    font-size: 0.875rem;
+    text-align: center;
+    transition: padding 0.3s ease;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+}
+
+.main-footer strong {
+    font-weight: 600;
+    color: #495057;
+}
+
+/* Responsive - Mobile & Tablet */
+@media (max-width: 992px) {
+    .main-sidebar {
+        width: var(--sidebar-width-collapsed);
+    }
+
+    .content-wrapper,
+    .main-footer {
+        margin-left: var(--sidebar-width-collapsed);
+    }
+
+    .main-sidebar ul li {
+        padding: 10px 16px;
+        font-size: 0.92rem;
+        margin: 3px 6px;
+    }
+
+    .main-sidebar ul li i {
+        font-size: 1.2rem;
+        margin-right: 12px;
+    }
+
+    .main-footer {
+        padding: 0.75rem 1rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* Mobile nhỏ (dưới 576px) */
+@media (max-width: 576px) {
+    .main-sidebar {
+        transform: translateX(-100%);
+    }
+
+    .main-sidebar.sidebar-open {
+        transform: translateX(0);
+    }
+
+    .content-wrapper,
+    .main-footer {
+        margin-left: 0 !important;
+    }
+}

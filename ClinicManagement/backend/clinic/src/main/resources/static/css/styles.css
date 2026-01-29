@@ -1,0 +1,932 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+
+/* Layout variables to keep fixed header spacing consistent */
+:root {
+    --navbar-height: 80px; /* matches .navbar min-height */
+    --submenu-height: 48px; /* approximate height of .sub-menu on desktop */
+}
+
+/* Custom styles */
+body {
+    font-family: "Roboto", sans-serif;
+    /* Reserve space for fixed navbar + submenu so content isn't hidden */
+    padding-top: calc(var(--navbar-height) + var(--submenu-height));
+    box-sizing: border-box;
+}
+
+.features i {
+    color: #151b21;
+}
+
+/* Thanh Tiêu đề */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem 0;
+    min-height: var(--navbar-height);
+    height: var(--navbar-height);
+    z-index: 1000;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+/* Navbar styles */
+.navbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #00c4cc;
+    max-width: 1300px;
+    margin: 0 auto; /* Canh giữa */
+    padding: 0 15px; /* Padding hai bên */
+}
+
+.navbar .form-control {
+    border-radius: 20px;
+    max-width: 800px;
+
+}
+
+
+/* Tùy chỉnh Search Bar */
+.mx-auto {
+    width: 500px;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#searchContainer {
+    max-width: 550px;
+    width: 100%;
+}
+
+#searchForm {
+    width: 100%;
+}
+
+#searchForm .form-control {
+    border-radius: 20px;
+    border: 1px solid #ced4da;
+    padding: 0.375rem 1rem;
+    font-size: 1rem;
+    height: 40px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#searchForm .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+.navbar .btn-outline-primary {
+    border-radius: 20px;
+    padding: 0.375rem 1rem;
+    font-size: 1rem;
+    height: 40px;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar .btn-outline-primary:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.navbar .btn-outline-primary i {
+    font-size: 1rem;
+}
+
+@media (max-width: 991px) {
+    .navbar .container {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0.5rem;
+    }
+
+    .mx-auto {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    #searchForm {
+        width: 100%;
+    }
+
+    .navbar .d-flex.align-items-center {
+        flex-direction: column;
+        margin-top: 0.5rem;
+    }
+
+    .navbar .btn-outline-primary,
+    .navbar .btn-primary {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .navbar{
+        min-height: 60px;
+    }
+    .navbar .form-control {
+        font-size: 0.85rem;
+        height: 36px;
+    }
+
+    .navbar .btn-outline-primary,
+    .navbar .btn-primary {
+        font-size: 0.85rem;
+        height: 36px;
+    }
+}
+/* Thanh Menu */
+.sub-menu {
+    position: fixed;
+    background-color: #f8f9fa;
+    left: 0;
+/* Đảm bảo chiếm toàn bộ chiều rộng */
+    right: 0;
+    /* Đảm bảo chiếm toàn bộ chiều rộng */
+    padding: 0.25rem 1rem;
+    /* Giảm padding để thu hẹp chiều cao */
+    min-height: var(--submenu-height);
+    top: var(--navbar-height); /* place submenu below navbar */
+    /* Giữ chiều cao như trước */
+    z-index: 800;
+    /* Đảm bảo navbar hiển thị trên các phần khác */
+    background-color: #fff;
+    /* Đảm bảo nền trắng để nội dung dễ đọc */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Giữ độ bóng */
+    box-sizing: border-box;
+
+}
+
+.sub-menu .nav-link {
+    color: #333;
+    font-weight: 500;
+    padding: 8px 15px;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.sub-menu .nav-link:hover {
+    color: #007bff;
+    background-color: #e9ecef;
+    border-radius: 5px;
+}
+
+.sub-menu .nav-link.active {
+    color: #007bff;
+    background-color: #e9ecef;
+    border-radius: 5px;
+}
+.sub-menu .btn{
+    background-color: #007bff;
+}
+/* Responsive adjustments */
+@media (max-width: 767px) {
+    .sub-menu .nav {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .sub-menu .nav-link {
+        display: inline-block;
+    }
+
+    /* Adjust navbar for mobile */
+    .navbar .container {
+        flex-wrap: wrap;
+        padding: 5px 10px;
+        font-size: 0.9rem;
+    }
+
+    .navbar .d-flex.align-items-center {
+        margin-top: 10px;
+    }
+}
+
+
+/* Hero Banner*/
+.hero-banner {
+    background: linear-gradient(to bottom right, #e6f0ff, #f8fbff);
+    padding: 40px 0;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+}
+
+.content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+.content {
+    flex: 1;
+    min-width: 320px;
+}
+
+.category {
+    display: inline-block;
+    background-color: #d0e4ff;
+    color: #0066cc;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.content h1 {
+    font-size: 2.8rem;
+    color: #0066cc;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 25px;
+}
+
+.content p {
+    font-size: 1.15rem;
+    color: #555;
+    line-height: 1;
+    margin-bottom: 35px;
+}
+
+.buttons {
+    margin-bottom: 45px;
+}
+
+.btn.schedule {
+    background-color: #0066cc;
+    color: white;
+    padding: 10px 32px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.05rem;
+    margin-right: 20px;
+    transition: background-color 0.3s;
+}
+
+.btn.schedule:hover {
+    background-color: #0055aa;
+}
+
+.btn.view {
+    background-color: transparent;
+    color: #0066cc;
+    border: 2px solid #0066cc;
+    padding: 10px 32px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.05rem;
+    transition: all 0.3s;
+}
+
+.btn.view:hover {
+    background-color: #0066cc;
+    color: white;
+}
+
+.options {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.option-column {
+    flex: 1;
+    min-width: 200px;
+}
+
+.option-item {
+    display: flex;
+    align-items: center;
+    font-size: 1.05rem;
+    color: #333;
+    margin-bottom: 18px;
+}
+
+.option-item .fa-check-circle {
+    color: #fff;
+    background-color: #0066cc;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    font-size: 14px;
+}
+
+.image-section {
+    position: relative;
+    flex: 1;
+    min-width: 350px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.badge {
+    position: absolute;
+    background: white;
+    color: #0066cc;
+    font-weight: bold;
+    font-size: 1.8rem;
+    padding: 18px 28px;
+    border-radius: 18px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    text-align: center;
+}
+
+.badge small {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: normal;
+    color: #666;
+    margin-top: 8px;
+}
+
+.badge.top {
+    top: 40px;
+    right: 5px;
+}
+
+.badge.bottom {
+    bottom: 40px;
+    left: 5px;
+}
+
+/* Responsive cho Hero Banner */
+@media (max-width: 992px) {
+    .content-wrapper {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+
+    .image-section {
+        margin-bottom: 50px;
+        height: 420px;
+    }
+
+    .content h1 {
+        font-size: 2.6rem;
+    }
+
+    .buttons {
+        justify-content: center;
+    }
+
+    .btn.schedule,
+    .btn.view {
+        display: block;
+        width: 80%;
+        max-width: 300px;
+        margin: 10px auto;
+    }
+
+    .options {
+        justify-content: center;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .content h1 {
+        font-size: 2.2rem;
+    }
+
+    .category {
+        font-size: 0.9rem;
+        padding: 8px 18px;
+    }
+
+    .badge {
+        font-size: 1.5rem;
+        padding: 14px 22px;
+    }
+
+    .badge small {
+        font-size: 0.8rem;
+    }
+
+    .options {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Modal styles */
+.modal-content {
+    border-radius: 10px;
+}
+
+.modal .btn-primary {
+border-radius: 20px;
+}
+
+/* Featured Articles */
+.main-content .card {
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.btn-outline-primary {
+    font-size: 0.9rem;
+    padding: 0.25rem 0.75rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+    .card-img-top {
+        height: 120px;
+    }
+
+    .card-title {
+        font-size: 1rem;
+    }
+
+    .card-text {
+        font-size: 0.85rem;
+    }
+
+    .btn-outline-primary {
+        font-size: 0.85rem;
+    }
+}
+
+/* Nội dung chính */
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Partners Section */
+.partners {
+    background-color: #f8f9fa;
+}
+
+.partner-slider {
+    height: 100px;
+    /* Chiều cao cố định cho slider */
+    margin: auto;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.partner-logos {
+    display: flex;
+    align-items: center;
+    width: 800%;
+    /* Đủ không gian cho 40 logo */
+    animation: scrollLeft 40s linear infinite;
+    /* Thời gian dài hơn để chạy chậm và mượt */
+}
+
+.partner-logo {
+    width: 100px;
+    /* Kích thước logo */
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    margin: 0 30px;
+}
+
+.partner-logo img {
+    max-width: 200%;
+    max-height: 120%;
+    object-fit: contain;
+    /* Giữ tỷ lệ logo */
+}
+
+/* Pause animation on hover */
+.partner-logos.paused {
+    animation-play-state: paused;
+}
+
+.partner-slider:hover .partner-logos {
+    animation-play-state: paused;
+}
+
+/* Animation for partner logos (from left to right) */
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+        /* Di chuyển nửa chiều rộng để lặp lại */
+    }
+}
+
+/* Animation for partner logos */
+@keyframes scrolls {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+        /* Di chuyển toàn bộ chiều rộng của slider */
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+    .partner-slider {
+        height: 80px;
+        /* Giảm chiều cao trên di động */
+    }
+
+    .partner-logo {
+        width: 150px;
+        /* Giảm kích thước logo trên di động */
+        height: 80px;
+        margin: 0 15px;
+        /* Giảm khoảng cách */
+    }
+
+    @keyframes scrolls {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-100%);
+            /* Điều chỉnh dựa trên chiều rộng mới */
+        }
+    }
+}
+
+
+
+
+
+/* Nội dung chính tin tức */
+.card a{
+    text-decoration: none;
+    color: #151b21;
+}
+.card .card-img-top{
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 8px;
+}
+
+.card .card-img-top:hover {
+  transform: scale(1.05);
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ====================== ĐẶT LỊCH KHÁM TRỰC TUYẾN ====================== */
+.booking-section {
+    background-color: #f8fbff;
+    padding: 80px 0;
+}
+
+.booking-section .card {
+    background-color: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.booking-section .card-body {
+    padding: 60px 50px;
+}
+
+.booking-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #0066cc;
+}
+
+.booking-section p.text-muted {
+    font-size: 1.1rem;
+}
+
+.booking-section .form-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.booking-section .form-control,
+.booking-section .form-select {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 1.05rem;
+    height: auto;
+    box-shadow: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.booking-section .form-control:focus,
+.booking-section .form-select:focus {
+    border-color: #0066cc;
+    box-shadow: 0 0 0 0.2rem rgba(0, 102, 204, 0.15);
+    outline: none;
+}
+
+.booking-section textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.booking-section .btn-primary {
+    background-color: #0066cc;
+    border: none;
+    padding: 14px 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: background-color 0.3s;
+}
+
+.booking-section .btn-primary:hover {
+    background-color: #0055aa;
+}
+
+/* Responsive cho mobile */
+@media (max-width: 768px) {
+    .booking-section .card-body {
+        padding: 40px 25px;
+    }
+
+    .booking-section h2 {
+        font-size: 2rem;
+    }
+
+    .booking-section .form-control,
+    .booking-section .form-select {
+        font-size: 1rem;
+        padding: 10px 14px;
+    }
+
+    .booking-section .btn-primary {
+        width: 100%;
+        padding: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    .booking-section .row.g-4 > .col-md-6 {
+        margin-bottom: 0;
+    }
+}
+
+
+/* chatbox AI */
+/* Nút mở chatbot */
+.chatbot-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 22px;
+    padding: 12px;
+    border: none;
+    border-radius: 50%;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+/* Hộp chatbot */
+.chatbot-container {
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 300px;
+    height: 420px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+/* Header */
+.chatbot-header {
+    background: #007bff;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Nội dung tin nhắn */
+.chatbot-messages {
+    height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+    background: #f4f4f4;
+}
+
+.user-message {
+    text-align: right;
+    margin: 5px;
+    background: #d0f0ff;
+    padding: 8px;
+    border-radius: 10px;
+    max-width: 80%;
+    margin-left: auto;
+}
+
+.bot-message {
+    text-align: left;
+    margin: 5px;
+    background: #e2e2e2;
+    padding: 8px;
+    border-radius: 10px;
+    max-width: 80%;
+    margin-right: auto;
+}
+
+/* Form nhập */
+.chatbot-form {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+
+.chatbot-form input {
+    flex: 1;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.chatbot-form button {
+    margin-left: 8px;
+    padding: 6px 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+
+
+footer a {
+    text-decoration: none;
+}
+
+/* Doctor Cards */
+.doctor-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.doctor-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.doctor-card img {
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 3px solid #00c4cc;
+}
+
+.doctor-card .card-body {
+    padding: 1.5rem;
+}
+
+.doctor-card .card-title {
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.doctor-card .card-text {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.doctor-card .btn {
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.doctor-card .btn-primary {
+    background-color: #00c4cc;
+    border-color: #00c4cc;
+}
+
+.doctor-card .btn-primary:hover {
+    background-color: #0099a0;
+    border-color: #0099a0;
+}
+
+/* Testimonials Section */
+.testimonials {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonials::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23ffffff" opacity="0.1"/></svg>') repeat;
+    pointer-events: none;
+}
+
+.testimonials .card {
+    border-radius: 20px;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.testimonials .card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.testimonials .fa-star {
+    font-size: 1.5rem;
+    transition: transform 0.2s ease;
+}
+
+.testimonials .fa-star:hover {
+    transform: scale(1.2);
+}
+
+.testimonials .carousel-control-prev,
+.testimonials .carousel-control-next {
+    width: 5%;
+    opacity: 0.7;
+}
+
+.testimonials .carousel-control-prev:hover,
+.testimonials .carousel-control-next:hover {
+    opacity: 1;
+}

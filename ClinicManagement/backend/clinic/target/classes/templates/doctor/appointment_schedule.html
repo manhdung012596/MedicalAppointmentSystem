@@ -1,0 +1,92 @@
+<!-- 15. doctor-appointments.html -->
+{% extends "doctor-layout.html" %}
+{% block title %}Lịch khám - Bác sĩ{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Lịch khám hôm nay</h3>
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Thời gian</th>
+                <th>Tên bệnh nhân</th>
+                <th>Lý do khám</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>08:00 - 08:30</td>
+                <td>Trần Thị B</td>
+                <td>Đau đầu, sốt</td>
+                <td><span class="badge badge-warning">Chờ khám</span></td>
+                <td>
+                  <button class="btn btn-sm btn-primary">Khám</button>
+                  <button class="btn btn-sm btn-secondary">Hủy</button>
+                </td>
+              </tr>
+              <tr>
+                <td>08:30 - 09:00</td>
+                <td>Lê Văn C</td>
+                <td>Kiểm tra sức khỏe định kỳ</td>
+                <td><span class="badge badge-success">Đã khám</span></td>
+                <td>
+                  <button class="btn btn-sm btn-info">Xem chi tiết</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Lịch khám tuần này</h3>
+        </div>
+        <div class="card-body">
+          <div id="calendar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'timeGridWeek',
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      },
+      events: [
+        {
+          title: 'Khám Trần Thị B',
+          start: '2025-12-21T08:00:00',
+          end: '2025-12-21T08:30:00'
+        }
+      ]
+    });
+    calendar.render();
+  });
+</script>
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css' rel='stylesheet' />
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js'></script>
+{% endblock %}
+      

@@ -1,0 +1,124 @@
+<div th:fragment="content">
+  <div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <h2 class="text-danger font-weight-bold">
+          <i class="fas fa-pills mr-2"></i> Quản Lý Thuốc
+        </h2>
+        <small class="text-muted">Quản trị viên - Phòng Khám OOSD</small>
+      </div>
+    </div>
+
+    <!-- Add Button -->
+    <div class="mb-4">
+      <button class="btn btn-primary" data-toggle="modal" data-target="#modalMedicine">
+        <i class="fas fa-plus mr-2"></i> + Thêm thuốc
+      </button>
+    </div>
+
+    <!-- Table -->
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h3 class="card-title mb-0">Danh sách thuốc</h3>
+      </div>
+      <div class="card-body">
+        <table class="table table-bordered table-striped" id="medicineTable">
+          <thead class="thead-dark">
+            <tr>
+              <th>ID</th>
+              <th>Tên thuốc</th>
+              <th>Đơn vị</th>
+              <th>Giá (VND)</th>
+              <th>Mô tả</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="medicine : ${medicines}">
+              <td th:text="${medicine.id}"></td>
+              <td th:text="${medicine.name}"></td>
+              <td th:text="${medicine.unit}"></td>
+              <td th:text="${#numbers.formatDecimal(medicine.price, 0, 'COMMA', 0, 'POINT')} + ' đ'"></td>
+              <td th:text="${medicine.description}"></td>
+              <td>
+                <a th:href="@{/admin/medicines/{id}/edit(id=${medicine.id})}" class="btn btn-sm btn-warning">
+                  <i class="fas fa-edit"></i>
+                </a>
+                <a th:href="@{/admin/medicines/{id}/delete(id=${medicine.id})}" class="btn btn-sm btn-danger"
+                  onclick="return confirm('Xóa thuốc này?')">
+                  <i class="fas fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(medicines)}">
+              <td colspan="6" class="text-center text-muted py-4">Chưa có thuốc nào trong kho.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Add Medicine -->
+  <div class="modal fade" id="modalMedicine">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">Thông Tin Thuốc</h5>
+          <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form th:object="${medicineForm}" th:action="@{/admin/medicines/save}" method="post">
+            <input type="hidden" th:field="*{id}">
+            <div class="form-group">
+              <label>Tên thuốc</label>
+              <input type="text" class="form-control" th:field="*{name}" required>
+            </div>
+            <div class="form-group">
+              <label>Đơn vị tính</label>
+              <select class="form-control" th:field="*{unit}">
+                <option value="Viên">Viên</option>
+                <option value="Vỉ">Vỉ</option>
+                <option value="Hộp">Hộp</option>
+                <option value="Chai">Chai</option>
+                <option value="Lọ">Lọ</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Giá tiền (VNĐ)</label>
+              <input type="number" class="form-control" th:field="*{price}" required>
+            </div>
+            <div class="form-group">
+              <label>Mô tả / Công dụng</label>
+              <textarea class="form-control" th:field="*{description}"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Lưu</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- JS for DataTables -->
+<th:block th:fragment="extraScripts">
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#medicineTable').DataTable({
+        "language": { "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/vi.json" }
+      });
+    });
+  </script>
+
+  <!-- Script to auto-open modal if editing -->
+  <script th:if="${editMode}">
+    $(document).ready(function () {
+      $('#modalMedicine').modal('show');
+    });
+  </script>
+</th:block>

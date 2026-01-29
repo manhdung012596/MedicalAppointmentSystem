@@ -1,0 +1,100 @@
+<!-- admin/online_bookings.html -->
+
+<div th:fragment="content">
+    <div class="container-fluid">
+        <!-- Tiêu đề -->
+        <h2 class="text-primary mb-4">
+            <i class="fas fa-globe mr-2"></i> Danh Sách Khách Đặt Lịch (Online)
+        </h2>
+
+        <!-- Alert Notification -->
+        <div th:if="${message}" class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <span th:text="${message}"></span>
+        </div>
+
+        <!-- Bảng Danh sách -->
+        <div class="card card-outline card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Yêu cầu đặt lịch chờ xử lý</h3>
+            </div>
+            <div class="card-body table-responsive">
+                <table class="table table-bordered table-striped" id="bookingTable">
+                    <thead class="bg-primary text-white">
+                        <tr>
+                            <th>Mã</th>
+                            <th>Họ Tên</th>
+                            <th>SĐT</th>
+                            <th>Email</th>
+                            <th>Ngày Sinh / Giới tính</th>
+                            <th>Khoa Khám</th>
+                            <th>Ngày Giờ Đặt</th>
+                            <th>Triệu Chứng</th>
+                            <th>Thao Tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="appt : ${appointments}" th:if="${not #lists.isEmpty(appointments)}">
+                            <td th:text="${appt.id}"></td>
+
+                            <!-- Custom Helper Accessors from Appointment Entity or traversing -->
+                            <td class="font-weight-bold" th:text="${appt.patient != null ? appt.patient.fullName : ''}">
+                            </td>
+                            <td>
+                                <a th:if="${appt.patient != null}" th:href="'tel:' + ${appt.patient.phone}"
+                                    th:text="${appt.patient.phone}"></a>
+                            </td>
+                            <td th:text="${appt.patient != null ? appt.patient.email : ''}"></td>
+                            <td>
+                                <span th:text="${appt.patient != null ? appt.patient.dob : ''}"></span> <br>
+                                <small class="text-muted"
+                                    th:text="${appt.patient != null ? appt.patient.gender : ''}"></small>
+                            </td>
+
+                            <td th:text="${appt.department != null ? appt.department.name : 'Chưa chọn'}"></td>
+
+                            <td>
+                                <span class="badge badge-info"
+                                    th:text="${#temporals.format(appt.appointmentTime, 'dd/MM/yyyy HH:mm')}"></span>
+                            </td>
+
+                            <td th:text="${appt.symptom}"></td>
+
+                            <td>
+                                <div class="btn-group">
+                                    <a th:href="@{/admin/appointments/{id}/edit(id=${appt.id})}"
+                                        class="btn btn-sm btn-success" title="Duyệt / Sửa">
+                                        <i class="fas fa-check"></i> Duyệt
+                                    </a>
+                                    <a th:href="@{/admin/appointments/{id}/delete(id=${appt.id})}"
+                                        class="btn btn-sm btn-danger ml-1" onclick="return confirm('Hủy lịch hẹn này?')"
+                                        title="Hủy">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(appointments)}">
+                            <td colspan="9" class="text-center text-muted py-4">
+                                <i class="fas fa-inbox fa-3x mb-3"></i><br>
+                                Hiện không có yêu cầu đặt lịch mới nào.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script>
+        $(document).ready(function () {
+            $('#bookingTable').DataTable({
+                "language": { "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/vi.json" },
+                "order": [[6, "asc"]], // Sort by Appointment Date
+                "pageLength": 10,
+                responsive: true
+            });
+        });
+    </script>
+</div>
