@@ -1,9 +1,0 @@
-{
-    "java.project.sourcePaths": [
-        "clinic-management/backend/clinic/src/main/java/com",
-        "clinic-management/backend/clinic/src/main/java",
-        "ClinicManagement/backend/clinic/src/main/java/com/clinic"
-    ],
-    "java.compile.nullAnalysis.mode": "automatic",
-    "java.configuration.updateBuildConfiguration": "interactive"
-}
