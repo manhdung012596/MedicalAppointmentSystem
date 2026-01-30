@@ -39,6 +39,7 @@ public class DataInit {
     public ApplicationRunner init() {
         return args -> {
             try {
+                System.out.println(">>> DataInit STARTED <<<");
                 Thread.sleep(1000); // Wait for schema creation
 
                 // 1. Tạo Admin
@@ -96,6 +97,7 @@ public class DataInit {
                     pat.setDob(java.time.LocalDate.parse("1990-01-01"));
                     pat.setSymptom("Đau đầu, chóng mặt");
                     pat.setAddress("Hà Nội");
+                    pat.setPassword("123456"); // Default password for testing
                     patientRepository.save(pat);
                     System.out.println("✓ Sample Patient created!");
 
@@ -127,6 +129,8 @@ public class DataInit {
             } catch (Exception e) {
                 System.out.println("❌ Error initializing data: " + e.getMessage());
                 e.printStackTrace();
+            } finally {
+                System.out.println(">>> DataInit FINISHED <<<");
             }
         };
     }

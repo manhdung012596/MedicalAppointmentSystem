@@ -21,7 +21,7 @@
                         <img th:src="${doctor.avatarUrl} ?: '/static/anh/default-avatar.jpg'" 
                              class="rounded-circle img-thumbnail shadow" width="180" height="180" alt="Avatar">
                         <p class="mt-3 font-weight-bold" th:text="${doctor.fullName}"></p>
-                        <p class="text-muted" th:text="${doctor.username} ?: 'doctor'"></p>
+                        <p class="text-muted" th:text="${doctor.email} ?: 'doctor@clinic.com'"></p>
                     </div>
                     <div class="col-md-8">
                         <h5>Giới tính: <span th:text="${doctor.gender} ?: 'Female'"></span></h5>
@@ -49,7 +49,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Tên đăng nhập</label>
-                                <input type="text" class="form-control" th:field="*{username}" placeholder="Tên đăng nhập">
+                                <input type="text" class="form-control" th:field="*{name}" placeholder="Tên đăng nhập">
                             </div>
                         </div>
                     </div>

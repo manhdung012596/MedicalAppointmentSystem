@@ -146,7 +146,20 @@ document.addEventListener("DOMContentLoaded", function () {
                             title: 'Xin chào ' + (userData.name || userData.fullName || 'Bạn'),
                             text: 'Đăng nhập thành công!'
                         }).then(() => {
-                            window.location.reload(); // Reload page to update UI
+                            // Redirect based on role
+                            if (userData.role === 'ADMIN') {
+                                setTimeout(() => {
+                                    window.location.href = '/admin/dashboard';
+                                }, 1500);
+                            } else if (userData.role === 'DOCTOR') {
+                                setTimeout(() => {
+                                    window.location.href = '/doctor/dashboard'; // Adjust URL if needed
+                                }, 1500);
+                            } else {
+                                setTimeout(() => {
+                                    window.location.reload(); // Reload page for patients/others
+                                }, 1500);
+                            }
                         });
                     } else {
                         throw new Error("Email hoặc mật khẩu không đúng!");
